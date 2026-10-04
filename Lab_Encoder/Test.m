@@ -1,0 +1,155 @@
+% Position
+rotary_pos = rotary{:, 1};
+slide_pos  = sliding{:, 1};
+
+% Rotary Potentiometer
+rotate_poten_A_run1 = rotary{:, 2};
+rotate_poten_A_run2 = rotary{:, 3};
+rotate_poten_A_run3 = rotary{:, 4};
+
+rotate_poten_B_run1 = rotary{:, 5};
+rotate_poten_B_run2 = rotary{:, 6};
+rotate_poten_B_run3 = rotary{:, 7};
+
+rotate_poten_C_run1 = rotary{:, 8};
+rotate_poten_C_run2 = rotary{:, 9};
+rotate_poten_C_run3 = rotary{:, 10};
+
+rotate_poten_A_mean = mean([rotate_poten_A_run1, rotate_poten_A_run2, rotate_poten_A_run3], 2);
+rotate_poten_A_std  = max(std([rotate_poten_A_run1, rotate_poten_A_run2, rotate_poten_A_run3], 0, 2));
+
+rotate_poten_B_mean = mean([rotate_poten_B_run1, rotate_poten_B_run2, rotate_poten_B_run3], 2);
+rotate_poten_B_std  = max(std([rotate_poten_B_run1, rotate_poten_B_run2, rotate_poten_B_run3], 0, 2));
+
+rotate_poten_C_mean = mean([rotate_poten_C_run1, rotate_poten_C_run2, rotate_poten_C_run3], 2);
+rotate_poten_C_std  = max(std([rotate_poten_C_run1, rotate_poten_C_run2, rotate_poten_C_run3], 0, 2));
+
+% Sliding Potentiometer
+sliding_poten_A_run1 = sliding{:, 2};
+sliding_poten_A_run2 = sliding{:, 3};
+sliding_poten_A_run3 = sliding{:, 4};
+
+sliding_poten_B_run1 = sliding{:, 5};
+sliding_poten_B_run2 = sliding{:, 6};
+sliding_poten_B_run3 = sliding{:, 7};
+
+sliding_poten_A_mean = mean([sliding_poten_A_run1, sliding_poten_A_run2, sliding_poten_A_run3], 2);
+sliding_poten_A_std = max(std([sliding_poten_A_run1, sliding_poten_A_run2, sliding_poten_A_run3], 0, 2));
+
+sliding_poten_B_mean = mean([sliding_poten_B_run1, sliding_poten_B_run2, sliding_poten_B_run3], 2);
+sliding_poten_B_std = max(std([sliding_poten_B_run1, sliding_poten_B_run2, sliding_poten_B_run3], 0, 2));
+
+% Trial Voltage in 2 typed Potentiometer
+figure;
+subplot(2,3,1)
+
+plot(rotary_pos, rotate_poten_A_run1, '-', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 1');
+hold on;
+plot(rotary_pos, rotate_poten_A_run2, '--', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 2');
+hold on;
+plot(rotary_pos, rotate_poten_A_run3, ':', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 3');
+hold on;
+
+title(sprintf('Rotary Potentiometer A (Audio Taper) \n[SD = %.2f]', rotate_poten_A_std), 'FontSize', 5);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Rotation Degree Position (%)', 'FontSize', 1);
+set(gca, 'FontSize', 12);
+xticks(0:5:100);
+legend('Location', 'southeast');
+
+subplot(2,3,2)
+plot(rotary_pos, rotate_poten_B_run1, '-', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 1');
+hold on
+plot(rotary_pos, rotate_poten_B_run2, '--', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 2');
+hold on;
+plot(rotary_pos, rotate_poten_B_run3, ':', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 3');
+hold on;
+
+title(sprintf('Rotary Potentiometer B (Linear Taper) \n[SD = %.2f]', rotate_poten_B_std), 'FontSize', 5);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Rotation Degree Position (%)', 'FontSize', 1);
+set(gca, 'FontSize', 12);
+xticks(0:5:100);
+legend('Location', 'southeast');
+
+subplot(2,3,3)
+plot(rotary_pos, rotate_poten_C_run1, '-', 'Color', 'b', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 1');
+hold on
+plot(rotary_pos, rotate_poten_C_run2, '--', 'Color', 'b', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 2');
+hold on;
+plot(rotary_pos, rotate_poten_C_run3, ':', 'Color', 'b', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 3');
+hold on;
+
+title(sprintf('Rotary Potentiometer C (Reverse Audio Taper) \n[SD = %.2f]', rotate_poten_C_std), 'FontSize', 5);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Rotation Degree Position (%)', 'FontSize', 1);
+set(gca, 'FontSize', 12);
+xticks(0:5:100);
+legend('Location', 'southeast');
+
+subplot(2,3,4)
+plot(slide_pos, sliding_poten_A_run1, '-', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 1');
+hold on
+plot(slide_pos, sliding_poten_A_run2, '--', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 2');
+hold on;
+plot(slide_pos, sliding_poten_A_run3, ':', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Trial 3');
+hold on;
+
+title(sprintf('Sliding Potentiometer A (Audio Taper) \n[SD = %.2f]', sliding_poten_A_std), 'FontSize', 5);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Escalation Length (cm)', 'FontSize', 12);
+set(gca, 'FontSize', 12);
+xticks(0:0.5:6);
+legend('Location', 'southeast');
+
+subplot(2,3,5)
+plot(slide_pos, sliding_poten_B_run1, '-', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'g', 'DisplayName', 'Trial 1');
+hold on
+plot(slide_pos, sliding_poten_B_run2, '--', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'g', 'DisplayName', 'Trial 2');
+hold on;
+plot(slide_pos, sliding_poten_B_run3, ':', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'g', 'DisplayName', 'Trial 3');
+hold on;
+
+title(sprintf('Sliding Potentiometer B (Linear Taper) \n[SD = %.2f]', sliding_poten_B_std), 'FontSize', 5);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Escalation Length (cm)', 'FontSize', 12);
+set(gca, 'FontSize', 12);
+xticks(0:0.5:6);
+legend('Location', 'southeast');
+
+% Mean Voltage in 2 types Potentionmeter
+figure;
+subplot(2,1,1);
+plot(rotary_pos, rotate_poten_A_mean, '-o', 'Color', 'r', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'r', 'DisplayName', 'Audio Taper A');
+hold on;
+plot(rotary_pos, rotate_poten_B_mean, '-o', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'g', 'DisplayName', 'Linear Taper B');
+hold on;
+plot(rotary_pos, rotate_poten_C_mean, '-o', 'Color', 'b', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'b', 'DisplayName', 'Reverse Audio Taper C');
+hold on;
+
+title('Rotary Potentiometer Rotation Response', 'FontSize', 30);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Rotation Degree Position (%)', 'FontSize', 1);
+set(gca, 'FontSize', 12);
+xticks(0:5:100);
+legend('Location', 'southeast');
+
+subplot(2,1,2);
+plot(slide_pos, sliding_poten_B_mean, '-o', 'Color', 'g', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'g', 'DisplayName', 'Linear Taper B');
+hold on;
+plot(slide_pos, sliding_poten_A_mean, '-o', 'Color', 'b', 'LineWidth', 1.5, 'MarkerSize', 5, 'MarkerFaceColor', 'b', 'DisplayName', 'Reverse Audio Taper C');
+hold on;
+
+title('Sliding Potentiometer Rotation Response', 'FontSize', 30);
+ylabel('Output Voltage (V)', 'FontSize', 12);
+grid on; grid minor; set(gca, 'LineWidth', 1.5);
+xlabel('Escalation Length (cm)', 'FontSize', 12);
+set(gca, 'FontSize', 12);
+xticks(0:0.5:6);
+legend('Location', 'southeast');
